@@ -7,7 +7,7 @@ WORKSTREAM:
 Monitoramento contínuo do site + correção definitiva da marca
 
 STATE:
-Correção da logo publicada; deploy verde; monitoramento contínuo solicitado
+Correção visual da logo aplicada; código corrigido; último deploy verde antes do handoff
 
 MODE:
 WATCH → deploy verde; monitoramento periódico ativo
@@ -31,21 +31,19 @@ SPEC / ADR:
 Handoff operacional fornecido pelo usuário: SIGA / Portable Continuation Protocol v1
 
 DONE:
-- Reconciliado estado real do repositório, HEAD, GitHub Actions e artefatos persistidos.
-- Verificado que não existem issues ou PRs abertos no repositório.
-- Identificado que referências externas aos arquivos de logo estavam falhando no site publicado.
-- Removidas as dependências de carregamento externo da marca no HTML.
-- Substituída a marca incorreta por um SVG vetorial traçado a partir do logo original fornecido pelo usuário.
-- Cabeçalho e rodapé usam o símbolo correto + wordmark; hero usa o símbolo correto.
-- Mantidos deploy e workflow do GitHub Pages.
+- Reconciliado estado real do repositório, HEAD, GitHub Actions, arquivos persistidos e screenshot fornecido pelo usuário.
+- Identificado que a marca anterior não correspondia à logo original e que o tratamento CSS também a recortava de forma inadequada.
+- Substituída a marca por um SVG vetorial traçado diretamente do logo original fornecido pelo usuário.
+- Cabeçalho e rodapé usam o símbolo correto + wordmark “PRINCIPADO / PRODUÇÕES”.
+- Hero usa o símbolo correto.
+- Removidas as versões sintéticas/incorretas do mark exibidas anteriormente.
 
 VERIFY:
-- index.html usa logo-mark.svg nos 3 pontos de imagem e não usa mais PNG/JPG de logo.
-- 3 elementos SVG inline foram confirmados no HTML.
-- GitHub Actions "Deploy site to GitHub Pages": success.
-- GitHub Pages build/deployment: success.
-- HEAD verificado no GitHub: 6bd6cb05baea1c78a44f5653b9612712019aef5f.
-- GitHub Actions no HEAD 6bd6cb05baea1c78a44f5653b9612712019aef5f: success.
+- index.html no HEAD usa logo-mark.svg nos três pontos de imagem e não contém o antigo PNG/JPG de logo.
+- Foram confirmadas 3 referências a logo-mark.svg e 2 ocorrências do wordmark textual no cabeçalho/rodapé.
+- GitHub Actions para o HEAD 6bd6cb05baea1c78a44f5653b9612712019aef5f: success.
+- A evidência visual da regressão veio do screenshot fornecido pelo usuário.
+- O domínio público não ficou acessível ao navegador do ambiente para uma nova captura visual; portanto, não afirmar verificação visual live além do que foi observado no screenshot e validado no código/deploy.
 
 GATES:
 Nenhum gate humano pendente para esta correção.
@@ -82,4 +80,5 @@ MONITORING POLICY:
 
 AUTOMATION STATUS:
 - O usuário solicitou análise automática de 1 em 1 hora.
-- Tentativa de criar automação horária foi rejeitada porque o plano atual não oferece frequência horária; nenhum agendamento horário foi criado.
+- A tentativa de criar frequência horária foi rejeitada pelo plano atual; apenas frequências de uma vez, diária, semanal, mensal ou anual estão disponíveis.
+- Nenhum agendamento horário foi criado, para não representar uma configuração diferente da solicitada.
