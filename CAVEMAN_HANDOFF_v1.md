@@ -7,7 +7,7 @@ WORKSTREAM:
 Monitoramento contínuo do site + correção definitiva da marca
 
 STATE:
-Correção visual da logo aplicada; código corrigido; último deploy verde antes do handoff
+Logo oficial aplicada como asset raster exato; Pages build/deploy verde
 
 MODE:
 WATCH → deploy verde; monitoramento periódico ativo
@@ -16,7 +16,7 @@ CANONICAL SOURCE:
 GitHub: principadoproducoes/principadoproducoes
 
 CURRENT VERSION / HEAD:
-6bd6cb05baea1c78a44f5653b9612712019aef5f
+f21f62a8aa0b0e74a54513053398e0d18cff237e
 
 BASE:
 main
@@ -31,19 +31,20 @@ SPEC / ADR:
 Handoff operacional fornecido pelo usuário: SIGA / Portable Continuation Protocol v1
 
 DONE:
-- Reconciliado estado real do repositório, HEAD, GitHub Actions, arquivos persistidos e screenshot fornecido pelo usuário.
-- Identificado que a marca anterior não correspondia à logo original e que o tratamento CSS também a recortava de forma inadequada.
-- Substituída a marca por um SVG vetorial traçado diretamente do logo original fornecido pelo usuário.
-- Cabeçalho e rodapé usam o símbolo correto + wordmark “PRINCIPADO / PRODUÇÕES”.
-- Hero usa o símbolo correto.
-- Removidas as versões sintéticas/incorretas do mark exibidas anteriormente.
+- Reconciliado estado real do repositório e screenshot do usuário.
+- Confirmado que a logo anterior estava visualmente incorreta.
+- Substituído o mark incorreto pelo arquivo derivado diretamente do logo oficial fornecido pelo usuário, preservando o desenho original.
+- Cabeçalho agora usa o recorte completo do logo oficial com símbolo + PRINCIPADO + PRODUÇÕES.
+- Hero usa a logo oficial completa, incluindo os descritores de serviços.
+- Footer usa o recorte do logo oficial.
+- CSS deixou de aplicar recorte circular/forçado ao logo.
 
 VERIFY:
-- index.html no HEAD usa logo-mark.svg nos três pontos de imagem e não contém o antigo PNG/JPG de logo.
-- Foram confirmadas 3 referências a logo-mark.svg e 2 ocorrências do wordmark textual no cabeçalho/rodapé.
-- GitHub Actions para o HEAD 6bd6cb05baea1c78a44f5653b9612712019aef5f: success.
-- A evidência visual da regressão veio do screenshot fornecido pelo usuário.
-- O domínio público não ficou acessível ao navegador do ambiente para uma nova captura visual; portanto, não afirmar verificação visual live além do que foi observado no screenshot e validado no código/deploy.
+- index.html aponta para assets/brand-header.webp no favicon/cabeçalho/rodapé e assets/brand-full.webp no hero.
+- Assets existem no HEAD f21f62a8aa0b0e74a54513053398e0d18cff237e.
+- A imagem local do asset foi inspecionada visualmente e corresponde à logo fornecida pelo usuário.
+- GitHub Pages build/deployment para o HEAD f21f62a8aa0b0e74a54513053398e0d18cff237e: success.
+- O workflow "Deploy site to GitHub Pages" do mesmo HEAD estava pendente no momento da última consulta, enquanto o job oficial de Pages já concluiu build e deploy com success.
 
 GATES:
 Nenhum gate humano pendente para esta correção.
