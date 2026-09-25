@@ -4,10 +4,10 @@ APP:
 Principado Produções website / GitHub Pages
 
 WORKSTREAM:
-Monitoramento contínuo do site + correções visuais e funcionais
+Monitoramento contínuo do site + correção definitiva da marca
 
 STATE:
-Publicado; monitoramento contínuo solicitado pelo usuário
+Correção da logo publicada; deploy verde; monitoramento contínuo solicitado
 
 MODE:
 WATCH → deploy verde; monitoramento periódico ativo
@@ -16,7 +16,7 @@ CANONICAL SOURCE:
 GitHub: principadoproducoes/principadoproducoes
 
 CURRENT VERSION / HEAD:
-0eee3ee7bce0bbfba7500f5dd1e217b32452c162
+6bd6cb05baea1c78a44f5653b9612712019aef5f
 
 BASE:
 main
@@ -35,15 +35,17 @@ DONE:
 - Verificado que não existem issues ou PRs abertos no repositório.
 - Identificado que referências externas aos arquivos de logo estavam falhando no site publicado.
 - Removidas as dependências de carregamento externo da marca no HTML.
-- Inserida a marca como SVG inline em 3 pontos do index.html: cabeçalho, hero e rodapé.
+- Substituída a marca incorreta por um SVG vetorial traçado a partir do logo original fornecido pelo usuário.
+- Cabeçalho e rodapé usam o símbolo correto + wordmark; hero usa o símbolo correto.
 - Mantidos deploy e workflow do GitHub Pages.
 
 VERIFY:
-- index.html no HEAD não possui mais referências src= a arquivos de logo.
+- index.html usa logo-mark.svg nos 3 pontos de imagem e não usa mais PNG/JPG de logo.
 - 3 elementos SVG inline foram confirmados no HTML.
 - GitHub Actions "Deploy site to GitHub Pages": success.
 - GitHub Pages build/deployment: success.
-- HEAD verificado no GitHub: 3f10ceb56c9e1f3aa9cf9ce9311b20882d40eccb.
+- HEAD verificado no GitHub: 6bd6cb05baea1c78a44f5653b9612712019aef5f.
+- GitHub Actions no HEAD 6bd6cb05baea1c78a44f5653b9612712019aef5f: success.
 
 GATES:
 Nenhum gate humano pendente para esta correção.
@@ -77,3 +79,7 @@ MONITORING POLICY:
 - Correção: o usuário autorizou previamente correções do site sem nova confirmação, exceto ações destrutivas ou gates explicitamente reservados.
 - Após correção: implementar, verificar, aguardar/confirmar deploy, persistir estado e evidências neste handoff.
 - Nunca declarar sucesso sem evidência.
+
+AUTOMATION STATUS:
+- O usuário solicitou análise automática de 1 em 1 hora.
+- Tentativa de criar automação horária foi rejeitada porque o plano atual não oferece frequência horária; nenhum agendamento horário foi criado.
