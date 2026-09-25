@@ -4,19 +4,19 @@ APP:
 Principado Produções website / GitHub Pages
 
 WORKSTREAM:
-Monitoramento contínuo do site + correção definitiva da marca
+Monitoramento contínuo do site + fidelidade visual da marca
 
 STATE:
-Logo oficial aplicada como asset raster exato; Pages build/deploy verde
+Correção da logo aplicada; deploy oficial verde no HEAD atual
 
 MODE:
-WATCH → deploy verde; monitoramento periódico ativo
+WATCH — aguardando apenas a confirmação do próximo ciclo
 
 CANONICAL SOURCE:
 GitHub: principadoproducoes/principadoproducoes
 
 CURRENT VERSION / HEAD:
-f21f62a8aa0b0e74a54513053398e0d18cff237e
+a340417663cfd97af213ddc04d9eb78b9deb4946
 
 BASE:
 main
@@ -31,55 +31,57 @@ SPEC / ADR:
 Handoff operacional fornecido pelo usuário: SIGA / Portable Continuation Protocol v1
 
 DONE:
-- Reconciliado estado real do repositório e screenshot do usuário.
-- Confirmado que a logo anterior estava visualmente incorreta.
-- Substituído o mark incorreto pelo arquivo derivado diretamente do logo oficial fornecido pelo usuário, preservando o desenho original.
-- Cabeçalho agora usa o recorte completo do logo oficial com símbolo + PRINCIPADO + PRODUÇÕES.
-- Hero usa a logo oficial completa, incluindo os descritores de serviços.
-- Footer usa o recorte do logo oficial.
-- CSS deixou de aplicar recorte circular/forçado ao logo.
+- Reconciliado o estado real do repositório antes da correção.
+- Identificada a causa visual: a logo estava sendo renderizada por assets incorretos e havia regras CSS de recorte circular.
+- A referência oficial fornecida pelo usuário foi vetorizada diretamente a partir da imagem enviada, preservando símbolo, orbital e lettering PRINCIPADO / PRODUÇÕES.
+- Criado assets/logo-principado-oficial.svg.
+- index.html agora usa o asset oficial em favicon, cabeçalho, hero e rodapé (4 referências).
+- CSS final remove qualquer máscara circular e preserva a proporção original da marca.
+- Os workflows de Deploy site to GitHub Pages e pages build and deployment do HEAD a340417663cfd97af213ddc04d9eb78b9deb4946 terminaram com success.
 
 VERIFY:
-- index.html aponta para assets/brand-header.webp no favicon/cabeçalho/rodapé e assets/brand-full.webp no hero.
-- Assets existem no HEAD f21f62a8aa0b0e74a54513053398e0d18cff237e.
-- A imagem local do asset foi inspecionada visualmente e corresponde à logo fornecida pelo usuário.
-- GitHub Pages build/deployment para o HEAD f21f62a8aa0b0e74a54513053398e0d18cff237e: success.
-- O workflow "Deploy site to GitHub Pages" do mesmo HEAD estava pendente no momento da última consulta, enquanto o job oficial de Pages já concluiu build e deploy com success.
+- index.html aponta as quatro ocorrências de marca para assets/logo-principado-oficial.svg.
+- A arte vetorial foi renderizada localmente sobre branco e comparada visualmente com a imagem oficial fornecida pelo usuário; composição e proporções correspondem à referência.
+- HEAD a340417663cfd97af213ddc04d9eb78b9deb4946 está em main.
+- Deploy site to GitHub Pages: success.
+- pages build and deployment: success.
+- A confirmação visual pelo domínio público nesta sessão não pôde ser feita via ferramenta HTTP externa; portanto o deploy verde e a validação local do asset são as evidências canônicas disponíveis.
 
 GATES:
-Nenhum gate humano pendente para esta correção.
+Nenhum gate humano pendente para a correção da logo.
 
 BLOCKERS:
-O ambiente desta sessão não consegue realizar uma requisição HTTP/DNS diretamente ao domínio do GitHub Pages, portanto a confirmação visual via navegador externo não foi possível aqui. A evidência disponível é o build/deploy oficial do GitHub Pages concluído com sucesso e a verificação do HTML publicado no HEAD.
+Nenhum blocker de GitHub/CI identificado. A ferramenta externa desta sessão não consegue consultar diretamente o domínio do GitHub Pages para screenshot/live DOM.
 
 INVARIANTS:
 - Não declarar sucesso sem evidência.
 - Não duplicar trabalho ativo.
 - Estado real do GitHub vence histórico do chat.
-- Preservar a estrutura e o conteúdo do site ao corrigir assets.
-- Não alterar comportamento apenas para mascarar falhas.
+- Não reintroduzir recorte circular, deformação ou asset alternativo na marca.
+- Preservar a logo fornecida pelo usuário como referência visual canônica.
 
 NEXT:
-Executar análise recorrente de 1 em 1 hora do site público, verificando estado real, regressões visuais e funcionais e corrigindo automaticamente o que for autorizado pelo usuário. Confirmar se os SVGs inline permanecem presentes e se o último deployment está verde. Só então continuar qualquer nova tarefa.
+No próximo SIGA, repetir VERIFY-FIRST: HEAD → Actions → arquivos/refs de logo → página pública/screenshot quando disponível → regressões visuais e funcionais → correção autorizada → validação → novo handoff.
 
 VERIFY-FIRST:
 1. Ler HEAD da main.
-2. Listar últimos runs de Actions.
-3. Ler index.html e confirmar ausência de src para logo e presença dos 3 SVGs inline.
-4. Se houver falha de deploy, investigar e corrigir antes de iniciar qualquer nova unidade de trabalho.
-5. Persistir o resultado do monitoramento no handoff e registrar apenas estado, evidência, correção e próximo passo.
-
+2. Conferir últimos runs do GitHub Actions e qualquer job em andamento.
+3. Ler index.html, style-05.css e assets/logo-principado-oficial.svg.
+4. Confirmar 4 referências ao asset oficial e ausência de brand-header.webp/brand-full.webp no HTML da marca.
+5. Inspecionar visualmente a publicação quando uma ferramenta de navegador/screenshot estiver disponível.
+6. Testar navegação, CTA, formulário/WhatsApp, assets e console/build quando possível.
+7. Persistir somente estado, evidência, correção e próximo passo.
 
 MONITORING POLICY:
-- Frequência: a cada 1 hora.
-- Escopo: status real do GitHub Pages, CI/CD, página pública, erros visuais e funcionais.
-- Visual: inspecionar a página publicada, incluindo logo, layout, tipografia, responsividade, navegação e elementos quebrados, usando screenshot/inspeção visual quando disponível.
-- Funcional: testar navegação, links, formulário/CTA, WhatsApp, assets, scripts e console/build quando a ferramenta permitir.
-- Correção: o usuário autorizou previamente correções do site sem nova confirmação, exceto ações destrutivas ou gates explicitamente reservados.
-- Após correção: implementar, verificar, aguardar/confirmar deploy, persistir estado e evidências neste handoff.
-- Nunca declarar sucesso sem evidência.
+- Frequência pretendida: a cada 1 hora.
+- Escopo: status real do GitHub Pages, CI/CD, página pública, regressões visuais e funcionais.
+- Visual: logo, layout, tipografia, responsividade, navegação e elementos quebrados.
+- Funcional: navegação, links, formulário/CTA, WhatsApp, assets, scripts e console/build quando a ferramenta permitir.
+- Correção: autorização prévia do usuário para corrigir o site sem nova confirmação, exceto ações destrutivas ou gates humanos.
+- Após qualquer correção: implementar → verificar → aguardar/confirmar deploy → persistir estado.
+- Nunca mascarar FAIL nem declarar sucesso sem evidência.
 
 AUTOMATION STATUS:
 - O usuário solicitou análise automática de 1 em 1 hora.
-- A tentativa de criar frequência horária foi rejeitada pelo plano atual; apenas frequências de uma vez, diária, semanal, mensal ou anual estão disponíveis.
-- Nenhum agendamento horário foi criado, para não representar uma configuração diferente da solicitada.
+- O plano atual rejeitou frequência horária; as frequências disponíveis nesta automação não incluem execução a cada hora.
+- Não representar um agendamento horário como existente enquanto o plano não o suportar.
