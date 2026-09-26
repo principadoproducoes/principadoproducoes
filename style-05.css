@@ -48,3 +48,40 @@
   .header .brand-text small{font-size:6px!important;letter-spacing:.26em!important;margin-top:5px!important}
   .hero-logo{width:min(58%,190px)!important}
 }
+
+
+/* FINAL LIVE FIX — the supplied mark is black artwork; on the site's black surfaces
+   the exact same geometry must be rendered in white so it remains visible. */
+.brand-mark,
+.hero-logo{
+  filter: brightness(0) invert(1)!important;
+  opacity: 1!important;
+  visibility: visible!important;
+}
+.brand-mark-wrap{
+  width: 60px!important;
+  height: 60px!important;
+  min-width:60px!important;
+  min-height:60px!important;
+}
+.hero-logo-wrap{
+  z-index: 3!important;
+}
+.hero-logo{
+  width: 230px!important;
+  max-width: 42%!important;
+  height: auto!important;
+  filter: brightness(0) invert(1)!important;
+}
+@media(max-width:700px){
+  .brand-mark-wrap{
+    width: 48px!important;
+    height: 48px!important;
+    min-width:48px!important;
+    min-height:48px!important;
+  }
+  .hero-logo{
+    width: 175px!important;
+    max-width: 58%!important;
+  }
+}
