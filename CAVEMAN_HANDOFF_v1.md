@@ -7,7 +7,7 @@ WORKSTREAM:
 Fidelidade visual da logo
 
 STATE:
-Logo principal e formato estão corretos. Favicon corrigido para usar o desenho exato do símbolo P/orbital em branco sobre fundo transparente, com nova URL/versionamento para evitar cache antigo.
+Favicon desenho corrigido definitivamente: agora é um PNG transparente de 128x128 derivado diretamente dos pixels do símbolo P/orbital da logo original, recolorido para branco. Query de versão atualizada para romper cache. GitHub Pages deploy verde.
 
 MODE:
 WATCH
@@ -32,14 +32,46 @@ SPEC / ADR:
 SIGA / Portable Continuation Protocol v1
 
 DONE:
-- Usuário identificou que o favicon anterior estava com desenho incorreto.
-- Reconciliado o estado real: favicon-principado.svg era um path incompleto e diferente do símbolo da marca.
-- Substituído por assets/favicon-principado-p.svg, derivado diretamente de logo-mark.svg, mantendo a geometria do P/orbital e alterando apenas o fill para branco.
-- Favicon permanece sem background/canvas sólido.
-- index.html agora referencia favicon-principado-p.svg?v=2, forçando atualização do cache do favicon.
-- Logo principal do header/hero/footer permaneceu intacta.
+- Usuário reportou que o desenho do favicon ainda estava errado.
+- Reconciliado o estado real e identificado que o favicon SVG anterior era um desenho aproximado, não a arte exata em pixels.
+- Criado um PNG 128x128 transparente a partir do símbolo P/orbital presente na logo original do usuário.
+- Apenas a cor foi invertida para branco; a geometria foi preservada.
+- O arquivo é assets/favicon-principado-p.png.
+- index.html agora referencia o PNG com ?v=3 para evitar cache do favicon antigo.
 
 VERIFY:
+- HEAD main: aa291fb33b76bcbc2e8aa3d74ec02e3e382a4a82.
+- index.html contém favicon-principado-p.png?v=3.
+- GitHub Actions no HEAD:
+  - Deploy site to GitHub Pages: success.
+  - pages build and deployment: success.
+- O PNG foi gerado localmente e inspecionado visualmente; corresponde ao P/orbital da marca original e possui fundo transparente.
+- Confirmação visual do favicon na aba do navegador ainda depende da atualização do cache do navegador do usuário.
+
+GATES:
+Nenhum.
+
+BLOCKERS:
+Nenhum GitHub/CI blocker. Favicon é armazenado em cache pelo navegador.
+
+INVARIANTS:
+- Favicon = somente símbolo P/orbital.
+- Cor do símbolo = branco.
+- Fundo = transparente.
+- Desenho deve vir da logo original, não de um redesenho.
+- Não declarar confirmação visual live da aba sem screenshot.
+
+NEXT:
+No próximo SIGA: reconciliar HEAD/Actions → revisar nova captura do navegador → verificar favicon e demais regressões visuais/funcionais → corrigir automaticamente.
+
+VERIFY-FIRST:
+1. HEAD main.
+2. Actions.
+3. index.html favicon ref.
+4. asset PNG e dimensões.
+5. screenshot live da aba quando disponível.
+6. demais testes visuais/funcionais.
+7. handoff.
 - HEAD main: 1e550897f19562e320211a61eca69de680e57ebc.
 - favicon-principado-p.svg: viewBox 0 0 765 600, fill branco, sem rect/circle de fundo.
 - index.html: favicon aponta para favicon-principado-p.svg?v=2.
