@@ -205,3 +205,29 @@
   .brand-header-name small{font-size:6px!important;letter-spacing:.26em!important;margin-top:5px!important}
   .hero-logo-exact-circle{width:112px!important;height:112px!important}
 }
+
+
+/* Center the complete logo inside the circular badges.
+   Keep the original artwork untouched; scale it down so none of the wordmark
+   is swallowed by the circle edge. */
+.brand-header-circle img{
+  width:82%!important;
+  height:82%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+.hero-logo-exact-circle{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.hero-logo-exact{
+  width:82%!important;
+  height:82%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+@media(max-width:700px){
+  .brand-header-circle img{width:82%!important;height:82%!important}
+  .hero-logo-exact{width:82%!important;height:82%!important}
+}
