@@ -29,3 +29,22 @@
 .hero-logo{width:min(82%,430px)!important;height:auto!important;aspect-ratio:774/552!important;object-fit:contain!important;display:block!important;border-radius:14px!important;clip-path:none!important;-webkit-clip-path:none!important;background:#fff!important;padding:16px!important;box-shadow:0 30px 70px rgba(0,0,0,.35)!important}
 .hero-logo-wrap{inset:55px 0 55px 0!important;display:grid!important;place-items:center!important}
 @media(max-width:700px){.brand-logo-wrap{width:132px!important;height:95px!important;border-radius:10px!important;padding:8px!important}.header.is-scrolled .brand-logo-wrap{width:112px!important;height:80px!important}.hero-logo{width:min(88%,320px)!important;padding:11px!important;border-radius:12px!important}.hero-logo-wrap{inset:45px 0!important}}
+
+
+/* Final brand treatment — follows the verified reference implementation:
+   P/orbit mark at left + PRINCIPADO/PRODUÇÕES wordmark; no circular crop. */
+.brand-lockup{display:flex!important;align-items:center!important;gap:12px!important;text-decoration:none!important}
+.brand-mark-wrap{width:58px!important;height:58px!important;display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 58px!important;background:transparent!important;border-radius:0!important;padding:0!important;overflow:visible!important;box-shadow:none!important}
+.brand-mark{width:100%!important;height:100%!important;display:block!important;object-fit:contain!important;border-radius:0!important;clip-path:none!important;-webkit-clip-path:none!important;padding:0!important;background:transparent!important}
+.header .brand-text,.footer .brand-text{display:flex!important;flex-direction:column!important;justify-content:center!important;color:#fff!important;font-weight:800!important;letter-spacing:.08em!important;font-size:15px!important;line-height:1!important}
+.header .brand-text small,.footer .brand-text small{display:block!important;margin-top:7px!important;font-size:8px!important;letter-spacing:.30em!important;font-weight:700!important}
+.header.is-scrolled .brand-mark-wrap{width:50px!important;height:50px!important;flex-basis:50px!important}
+.hero-logo-wrap{inset:55px 0 55px 0!important;display:grid!important;place-items:center!important}
+.hero-logo{width:min(52%,260px)!important;height:auto!important;aspect-ratio:765/600!important;object-fit:contain!important;display:block!important;border-radius:0!important;clip-path:none!important;-webkit-clip-path:none!important;background:transparent!important;padding:0!important;box-shadow:none!important}
+@media(max-width:700px){
+  .brand-lockup{gap:9px!important}
+  .brand-mark-wrap{width:46px!important;height:46px!important;flex-basis:46px!important}
+  .header .brand-text{font-size:12px!important}
+  .header .brand-text small{font-size:6px!important;letter-spacing:.26em!important;margin-top:5px!important}
+  .hero-logo{width:min(58%,190px)!important}
+}
