@@ -4,10 +4,10 @@ APP:
 Principado Produções website / GitHub Pages
 
 WORKSTREAM:
-Monitoramento contínuo do site + fidelidade visual da marca
+Troca definitiva da logo pelo arquivo enviado pelo usuário
 
 STATE:
-Logo visibility regression found in live screenshot: black P/orbital SVG was being rendered on black surfaces, making it appear missing/dark. CSS fix applied to render the exact same SVG geometry in white on dark surfaces. GitHub Pages deploy is green.
+Logo do site substituída pelo artwork fornecido pelo usuário; build e deploy verdes
 
 MODE:
 WATCH
@@ -16,7 +16,7 @@ CANONICAL SOURCE:
 GitHub: principadoproducoes/principadoproducoes
 
 CURRENT VERSION / HEAD:
-bc90ac43987c2f79092aeca73b15fddca01a50e5
+3c70916e073dc214a2f5e5154dd46a5df311223f
 
 BASE:
 main
@@ -28,62 +28,52 @@ PR / MR / TASK:
 Nenhum
 
 SPEC / ADR:
-Portable Continuation Protocol / SIGA fornecido pelo usuário
+SIGA / Portable Continuation Protocol v1
 
 DONE:
-- VERIFY-FIRST performed after user reported the visible failure.
-- User screenshot confirmed header mark invisible and hero mark almost black on black.
-- Root cause identified in CSS/rendering: logo-mark.svg is black artwork and had no contrast on the site's black background.
-- Corrected style-05.css to apply filter: brightness(0) invert(1) to .brand-mark and .hero-logo, preserving the original SVG geometry.
-- Increased mark visibility/size while keeping the reference-site treatment: P/orbital mark in header and hero, wordmark text beside it in header/footer.
-- Deployed commit b27e0a7b24e9cd4a041776e184c30b80dba7ee37.
+- Reconciliado o estado real antes da alteração.
+- Usuário forneceu a logo oficial em PNG e autorizou substituição imediata.
+- Arquivo enviado foi inspecionado: 907x620, RGB; conteúdo da marca ocupa exatamente 774x552.
+- A arte fornecida foi vetorizada preservando o desenho visual e os textos PRINCIPADO / PRODUÇÕES, sem filtro de cor, sem máscara circular e sem redesign.
+- Criado assets/logo-principado-upload.svg a partir diretamente do arquivo enviado.
+- index.html agora usa somente assets/logo-principado-upload.svg nas três ocorrências de marca do site: header, hero e footer.
+- Removidas as referências de logo-mark.svg do HTML.
+- CSS final aplica o asset enviado diretamente, sem filtros, clip-path ou crop.
 
 VERIFY:
-- main HEAD is b27e0a7b24e9cd4a041776e184c30b80dba7ee37.
-- index.html references logo-mark.svg for header, hero and footer.
-- style-05.css contains definitive contrast fix: brightness(0) invert(1).
-- GitHub Actions for this HEAD:
+- HEAD main: 3c70916e073dc214a2f5e5154dd46a5df311223f.
+- index.html contém 3 referências a assets/logo-principado-upload.svg.
+- index.html contém 0 referências a logo-mark.svg.
+- GitHub Actions no HEAD 3c70916e073dc214a2f5e5154dd46a5df311223f:
   - Deploy site to GitHub Pages: success
-  - pages build and deployment: success
-- Live screenshot of the updated public page could not be captured by the available web verifier after deployment; do not claim live visual confirmation until a browser/screenshot result is available.
-
-BLOCKERS:
-No GitHub/CI blockers. Live visual verification is the only remaining evidence gap.
-- index.html contém o lockup com logo-mark.svg no header e footer.
-- hero usa logo-mark.svg.
-- CSS final de brand-mark não aplica clip-path circular.
-- GitHub Actions no HEAD bc90ac43987c2f79092aeca73b15fddca01a50e5:
-  - Deploy site to GitHub Pages: success
-  - pages build and deployment: success
-- A página de referência pública está acessível ao verificador web e foi usada como referência visual de marca. A página pública deste repositório não pôde ser reaberta pelo verificador web nesta sessão após o deploy; portanto não declarar confirmação visual live desta própria URL.
+  - pages build and deployment: success.
+- A URL pública continua inacessível ao verificador web nesta sessão, portanto não declarar captura visual live pós-deploy como evidência.
 
 GATES:
 Nenhum gate humano pendente.
 
 BLOCKERS:
-Nenhum blocker de GitHub/CI. Limitação atual: o verificador web não abriu a URL pública deste repositório para uma inspeção live pós-deploy.
+Nenhum blocker de GitHub/CI. Resta apenas confirmação visual no navegador do usuário porque o verificador web não consegue abrir a publicação.
 
 INVARIANTS:
-- Estado real do GitHub vence chat/memória.
+- A imagem fornecida pelo usuário é a referência canônica da logo.
+- Não usar símbolo alternativo, crop circular, filtro de inversão, deformação ou substituição por logo gerada.
 - Não declarar sucesso visual live sem evidência.
-- Não reintroduzir logo dentro de círculo/crop.
-- Não deformar a marca.
-- Usar a referência fornecida pelo usuário + página de referência publicada para calibrar o tratamento.
 
 NEXT:
-No próximo SIGA: reconciliar HEAD/Actions → abrir página pública e referência → comparar logo e demais regressões visuais/funcionais → corrigir automaticamente conforme autorização existente → validar CI/deploy → persistir handoff.
+No próximo SIGA: reconcilie HEAD/Actions → abra a publicação quando possível → compare visualmente a logo com o arquivo fornecido → corrija qualquer diferença restante → validar deploy → persistir handoff.
 
 VERIFY-FIRST:
 1. Ler HEAD da main.
-2. Conferir Actions e jobs ativos.
-3. Ler index.html, style.css, style-05.css, logo-mark.svg e asset oficial.
-4. Conferir referências de logo e ausência de máscara circular nas regras finais.
-5. Abrir referência pública fornecida pelo usuário e, quando acessível, a publicação própria.
-6. Testar navegação, CTA, formulário/WhatsApp, links, assets e build.
-7. Persistir somente estado, evidências, correções, blockers e próximo passo.
+2. Conferir Actions.
+3. Ler index.html, style-05.css e assets/logo-principado-upload.svg.
+4. Confirmar as 3 referências à nova logo e zero referências a logo-mark.svg.
+5. Inspecionar página pública/screenshot quando disponível.
+6. Testar navegação e funções principais.
+7. Persistir estado e evidências.
 
 MONITORING POLICY:
-- O usuário autorizou correção automática do site após análise.
+- Correções automáticas estão autorizadas pelo usuário após análise.
 - Frequência desejada: 1 hora.
-- A automação disponível nesta conta não suporta a frequência horária; não registrar um agendamento horário como ativo sem evidência.
+- A automação desta conta não suporta execução horária; não tratar isso como um agendamento ativo.
 - Em cada ciclo: RECONCILE → CLASSIFY → EXECUTE → VERIFY → HANDOFF.
