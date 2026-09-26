@@ -85,3 +85,38 @@
     max-width: 58%!important;
   }
 }
+
+
+/* Uploaded logo is the canonical company artwork. Use it directly, without circular
+   masks, alternate marks, filters, or redraws. */
+.brand-image-wrap{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:156px!important;height:112px!important;background:#fff!important;
+  border-radius:0!important;overflow:hidden!important;padding:0!important;
+  box-shadow:none!important;
+}
+.brand-image{
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:contain!important;border-radius:0!important;clip-path:none!important;
+  -webkit-clip-path:none!important;filter:none!important;background:#fff!important;
+}
+.hero-logo-wrap{
+  inset:40px 0!important;display:grid!important;place-items:center!important;
+}
+.hero-logo-image-wrap{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:390px!important;max-width:70%!important;height:auto!important;
+  background:#fff!important;border-radius:0!important;overflow:hidden!important;
+  box-shadow:none!important;
+}
+.hero-logo-image{
+  display:block!important;width:100%!important;height:auto!important;
+  object-fit:contain!important;border-radius:0!important;clip-path:none!important;
+  -webkit-clip-path:none!important;filter:none!important;background:#fff!important;
+}
+.footer .brand-image-wrap{width:140px!important;height:100px!important}
+@media(max-width:700px){
+  .brand-image-wrap{width:132px!important;height:94px!important}
+  .hero-logo-image-wrap{width:300px!important;max-width:78%!important}
+  .footer .brand-image-wrap{width:122px!important;height:87px!important}
+}
