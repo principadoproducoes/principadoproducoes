@@ -7,16 +7,17 @@ WORKSTREAM:
 Fidelidade visual da logo
 
 STATE:
-Logo correta mantida; formato corrigido para coincidir com a referência visual fornecida
+Logo correta e formato correto; centralização interna ajustada para evitar que o wordmark fique cortado dentro dos círculos
 
 MODE:
 WATCH
 
 CANONICAL SOURCE:
 GitHub: principadoproducoes/principadoproducoes
+User-supplied logo attachment is the visual reference.
 
 CURRENT VERSION / HEAD:
-532ff71620e30f3ecb7223de76b71c5b1d6fdb81
+62e7d3c0f5131a2ccbdf596a075cfd7d3e420a07
 
 BASE:
 main
@@ -31,51 +32,46 @@ SPEC / ADR:
 SIGA / Portable Continuation Protocol v1
 
 DONE:
-- Comparadas as duas capturas enviadas pelo usuário: implementação atual e referência.
-- Identificado que o artwork da logo já estava correto; o erro restante era somente o formato de apresentação.
-- Referência exige: cabeçalho com logo completa dentro de círculo branco pequeno + wordmark PRINCIPADO / PRODUÇÕES separado à direita; hero com a logo completa dentro de círculo branco maior.
-- Corrigido index.html para usar esse formato.
-- Corrigido style-05.css para círculo branco de 58px no header e 138px no hero (112px/48px em mobile), sem distorção do artwork.
-- Mantido o asset canônico assets/logo-principado-exact.svg.
+- Usuário confirmou que a arte e o formato geral estavam corretos, mas o conteúdo estava visualmente "comido"/apertado dentro dos círculos.
+- Ajustado somente o enquadramento interno: .brand-header-circle img e .hero-logo-exact passaram a ocupar 82% do círculo, com object-fit: contain e object-position:center.
+- A arte da logo não foi modificada; apenas seu tamanho interno e centralização foram ajustados.
+- Deploy concluído.
 
 VERIFY:
-- main HEAD: 532ff71620e30f3ecb7223de76b71c5b1d6fdb81.
-- index.html contém a estrutura brand-header-circle + brand-header-name.
-- index.html contém hero-logo-exact-circle.
-- CSS aplica border-radius:50% aos dois contêineres.
-- GitHub Actions no HEAD:
+- HEAD main: 62e7d3c0f5131a2ccbdf596a075cfd7d3e420a07.
+- GitHub Actions:
   - Deploy site to GitHub Pages: success.
   - pages build and deployment: success.
-- A confirmação visual live da própria URL ainda depende do navegador do usuário porque o verificador web não abre essa publicação nesta sessão.
+- CSS contém o ajuste 82%/contain/center para header e hero.
 
 GATES:
 Nenhum gate humano pendente.
 
 BLOCKERS:
 Nenhum blocker de GitHub/CI.
-Limitação: confirmação visual pós-deploy no navegador do usuário ainda necessária.
+Confirmação visual live final depende do navegador do usuário porque o verificador web não captura a publicação própria nesta sessão.
 
 INVARIANTS:
 - Não alterar a arte fornecida.
-- Não usar logo alternativa.
-- Não aplicar filtro de cor ao artwork.
-- O formato pode ser circular apenas no contêiner, preservando a arte completa dentro dele.
-- Não declarar validação visual live sem screenshot.
+- Não introduzir outro símbolo.
+- Não aplicar filtro de cor.
+- Não permitir que o wordmark seja cortado pelas bordas circulares.
+- Validar deploy antes de considerar concluído.
 
 NEXT:
-No próximo SIGA: reconciliar HEAD/Actions → comparar a captura atual com a referência → verificar demais erros visuais/funcionais → corrigir automaticamente conforme autorização → validar deploy → persistir handoff.
+No próximo SIGA: reconciliar HEAD/Actions → revisar screenshot atual → verificar outros erros visuais/funcionais → corrigir automaticamente conforme autorização → validar deploy → persistir handoff.
 
 VERIFY-FIRST:
-1. Ler HEAD da main.
-2. Conferir Actions.
-3. Ler index.html, style-05.css e asset canônico.
-4. Confirmar formato circular do header/hero.
-5. Inspecionar screenshot live quando disponível.
-6. Testar navegação e funções principais.
-7. Persistir estado e evidências.
+1. HEAD main.
+2. Actions.
+3. index.html + style-05.css + asset canônico.
+4. Confirmar centralização interna dos círculos.
+5. Screenshot live quando disponível.
+6. Testar navegação, CTA e funções principais.
+7. Persistir estado/evidências.
 
 MONITORING POLICY:
-- Usuário autorizou correções automáticas após análise.
+- Correção automática autorizada pelo usuário após análise.
 - Frequência desejada: 1 hora.
-- A automação desta conta não suporta execução horária; não declarar agendamento horário ativo sem evidência.
+- A automação disponível não suporta frequência horária; não declarar agendamento horário ativo sem evidência.
 - Fluxo: RECONCILE → CLASSIFY → EXECUTE → VERIFY → HANDOFF.
