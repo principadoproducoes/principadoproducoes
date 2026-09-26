@@ -7,7 +7,7 @@ WORKSTREAM:
 Monitoramento contínuo do site + fidelidade visual da marca
 
 STATE:
-Logo alinhada à referência publicada; correção final deployada com CI verde
+Logo visibility regression found in live screenshot: black P/orbital SVG was being rendered on black surfaces, making it appear missing/dark. CSS fix applied to render the exact same SVG geometry in white on dark surfaces. GitHub Pages deploy is green.
 
 MODE:
 WATCH
@@ -31,17 +31,24 @@ SPEC / ADR:
 Portable Continuation Protocol / SIGA fornecido pelo usuário
 
 DONE:
-- VERIFY-FIRST executado antes de qualquer alteração.
-- GitHub main e Actions reconciliados; não havia workstream humano concorrente.
-- A referência pública indicada pelo usuário foi consultada. Ela renderiza a marca no cabeçalho/rodapé como lockup: símbolo P/orbital + PRINCIPADO / PRODUÇÕES; no bloco de experiência aparece o símbolo P.
-- Na implementação atual, o cabeçalho estava usando o lockup vertical completo dentro de uma caixa branca; isso não correspondia à referência.
-- Corrigido index.html para usar logo-mark.svg no cabeçalho, com PRINCIPADO / PRODUÇÕES como wordmark separado.
-- Corrigido o hero para usar logo-mark.svg, sem círculo/crop.
-- Rodapé alinhado ao mesmo lockup.
-- Mantida assets/logo-principado-oficial.svg como asset oficial completo/fonte de referência e favicon.
-- Corrigidas regras CSS finais em style-05.css para impedir máscara circular e respeitar o tratamento da referência.
+- VERIFY-FIRST performed after user reported the visible failure.
+- User screenshot confirmed header mark invisible and hero mark almost black on black.
+- Root cause identified in CSS/rendering: logo-mark.svg is black artwork and had no contrast on the site's black background.
+- Corrected style-05.css to apply filter: brightness(0) invert(1) to .brand-mark and .hero-logo, preserving the original SVG geometry.
+- Increased mark visibility/size while keeping the reference-site treatment: P/orbital mark in header and hero, wordmark text beside it in header/footer.
+- Deployed commit b27e0a7b24e9cd4a041776e184c30b80dba7ee37.
 
 VERIFY:
+- main HEAD is b27e0a7b24e9cd4a041776e184c30b80dba7ee37.
+- index.html references logo-mark.svg for header, hero and footer.
+- style-05.css contains definitive contrast fix: brightness(0) invert(1).
+- GitHub Actions for this HEAD:
+  - Deploy site to GitHub Pages: success
+  - pages build and deployment: success
+- Live screenshot of the updated public page could not be captured by the available web verifier after deployment; do not claim live visual confirmation until a browser/screenshot result is available.
+
+BLOCKERS:
+No GitHub/CI blockers. Live visual verification is the only remaining evidence gap.
 - index.html contém o lockup com logo-mark.svg no header e footer.
 - hero usa logo-mark.svg.
 - CSS final de brand-mark não aplica clip-path circular.
