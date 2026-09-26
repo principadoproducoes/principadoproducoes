@@ -7,7 +7,7 @@ WORKSTREAM:
 Fidelidade visual da logo
 
 STATE:
-Logo correta e formato correto; centralização interna ajustada para evitar que o wordmark fique cortado dentro dos círculos
+Brand standardized across header, hero and footer. Footer now uses the full canonical logo lockup. Browser favicon now uses a dedicated transparent white P mark.
 
 MODE:
 WATCH
@@ -32,12 +32,23 @@ SPEC / ADR:
 SIGA / Portable Continuation Protocol v1
 
 DONE:
-- Usuário confirmou que a arte e o formato geral estavam corretos, mas o conteúdo estava visualmente "comido"/apertado dentro dos círculos.
-- Ajustado somente o enquadramento interno: .brand-header-circle img e .hero-logo-exact passaram a ocupar 82% do círculo, com object-fit: contain e object-position:center.
-- A arte da logo não foi modificada; apenas seu tamanho interno e centralização foram ajustados.
-- Deploy concluído.
+- Reconciled current screenshot: header/hero were correct; footer still used the old rectangular logo treatment; favicon still used full logo.
+- Updated footer to the same circular full-logo lockup as the header.
+- Added assets/favicon-principado.svg: transparent SVG containing only the white P mark for the browser tab.
+- Updated favicon link in index.html to the new dedicated white-P asset.
+- No change to the canonical full logo artwork used in header/hero/footer.
 
 VERIFY:
+- HEAD main: 0cf307d591171b80c2d845eda3eeaf58bbc6798f.
+- Header, hero and footer reference assets/logo-principado-exact.svg.
+- Favicon tag references assets/favicon-principado.svg.
+- Favicon contains white fill and the P-only viewBox.
+- GitHub Actions for HEAD:
+  - Deploy site to GitHub Pages: success.
+  - pages build and deployment: success.
+- Live visual screenshot of the published page is still supplied by the user; the web verifier does not reliably open this publication.
+
+GATES:
 - HEAD main: 62e7d3c0f5131a2ccbdf596a075cfd7d3e420a07.
 - GitHub Actions:
   - Deploy site to GitHub Pages: success.
@@ -59,7 +70,7 @@ INVARIANTS:
 - Validar deploy antes de considerar concluído.
 
 NEXT:
-No próximo SIGA: reconciliar HEAD/Actions → revisar screenshot atual → verificar outros erros visuais/funcionais → corrigir automaticamente conforme autorização → validar deploy → persistir handoff.
+At next SIGA, compare a fresh screenshot against the reference, then inspect non-logo visual and functional regressions.
 
 VERIFY-FIRST:
 1. HEAD main.
