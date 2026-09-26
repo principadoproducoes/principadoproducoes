@@ -4,19 +4,20 @@ APP:
 Principado Produções website / GitHub Pages
 
 WORKSTREAM:
-Troca definitiva da logo pelo arquivo enviado pelo usuário
+Correção definitiva da logo usando a referência enviada pelo usuário
 
 STATE:
-Logo do site substituída pelo artwork fornecido pelo usuário; build e deploy verdes
+Nova arte única baseada diretamente na logo anexada, sem uso do símbolo alternativo. HTML atualizado em todas as ocorrências. CI e deploy verdes.
 
 MODE:
 WATCH
 
 CANONICAL SOURCE:
 GitHub: principadoproducoes/principadoproducoes
+User-supplied logo attachment is the visual reference.
 
 CURRENT VERSION / HEAD:
-3c70916e073dc214a2f5e5154dd46a5df311223f
+dcd9b7cfb5ec9e0603639b153f6e28771b9591e5
 
 BASE:
 main
@@ -31,49 +32,50 @@ SPEC / ADR:
 SIGA / Portable Continuation Protocol v1
 
 DONE:
-- Reconciliado o estado real antes da alteração.
-- Usuário forneceu a logo oficial em PNG e autorizou substituição imediata.
-- Arquivo enviado foi inspecionado: 907x620, RGB; conteúdo da marca ocupa exatamente 774x552.
-- A arte fornecida foi vetorizada preservando o desenho visual e os textos PRINCIPADO / PRODUÇÕES, sem filtro de cor, sem máscara circular e sem redesign.
-- Criado assets/logo-principado-upload.svg a partir diretamente do arquivo enviado.
-- index.html agora usa somente assets/logo-principado-upload.svg nas três ocorrências de marca do site: header, hero e footer.
-- Removidas as referências de logo-mark.svg do HTML.
-- CSS final aplica o asset enviado diretamente, sem filtros, clip-path ou crop.
+- VERIFY-FIRST executado antes da correção.
+- Identificada a causa da divergência visual: múltiplos assets e CSS históricos de máscara circular/alternância de marca.
+- A imagem enviada pelo usuário foi usada como fonte visual direta.
+- Criado assets/logo-principado-exact.svg com o artwork integral da referência, incluindo símbolo P/orbital e wordmark PRINCIPADO / PRODUÇÕES, com fundo branco.
+- index.html agora usa assets/logo-principado-exact.svg em favicon, header, hero e footer.
+- Zerar referências antigas no HTML: logo-mark.svg e logo-principado-upload.svg não aparecem mais.
+- CSS novo usa o asset único sem filter, clip-path, crop ou circular mask.
 
 VERIFY:
-- HEAD main: 3c70916e073dc214a2f5e5154dd46a5df311223f.
-- index.html contém 3 referências a assets/logo-principado-upload.svg.
-- index.html contém 0 referências a logo-mark.svg.
-- GitHub Actions no HEAD 3c70916e073dc214a2f5e5154dd46a5df311223f:
-  - Deploy site to GitHub Pages: success
+- HEAD main dcd9b7cfb5ec9e0603639b153f6e28771b9591e5.
+- index.html: 4 referências a logo-principado-exact.svg; 0 referências a logo-mark.svg/logo-principado-upload.svg.
+- SVG presente e contém fundo branco explícito para preservar a aparência da imagem de referência sobre o site escuro.
+- GitHub Actions no HEAD:
+  - Deploy site to GitHub Pages: success.
   - pages build and deployment: success.
-- A URL pública continua inacessível ao verificador web nesta sessão, portanto não declarar captura visual live pós-deploy como evidência.
+- A inspeção visual do domínio público pós-deploy não pôde ser capturada pela ferramenta web desta sessão. Não declarar confirmação live sem screenshot/DOM.
 
 GATES:
 Nenhum gate humano pendente.
 
 BLOCKERS:
-Nenhum blocker de GitHub/CI. Resta apenas confirmação visual no navegador do usuário porque o verificador web não consegue abrir a publicação.
+Nenhum blocker de GitHub/CI.
+Limitação: verificador web não abre a publicação própria nesta sessão; confirmação final visual depende do navegador do usuário ou de ferramenta de screenshot funcional.
 
 INVARIANTS:
-- A imagem fornecida pelo usuário é a referência canônica da logo.
-- Não usar símbolo alternativo, crop circular, filtro de inversão, deformação ou substituição por logo gerada.
+- A imagem enviada pelo usuário é a referência canônica.
+- Não substituir por símbolo alternativo.
+- Não aplicar círculo, crop, filtro ou inversão.
 - Não declarar sucesso visual live sem evidência.
 
 NEXT:
-No próximo SIGA: reconcilie HEAD/Actions → abra a publicação quando possível → compare visualmente a logo com o arquivo fornecido → corrija qualquer diferença restante → validar deploy → persistir handoff.
+No próximo SIGA: reconciliar HEAD/Actions → abrir a página pública quando possível → comparar visualmente com a referência enviada → verificar demais erros visuais/funcionais → corrigir automaticamente conforme autorização → validar deploy → persistir handoff.
 
 VERIFY-FIRST:
-1. Ler HEAD da main.
-2. Conferir Actions.
-3. Ler index.html, style-05.css e assets/logo-principado-upload.svg.
-4. Confirmar as 3 referências à nova logo e zero referências a logo-mark.svg.
-5. Inspecionar página pública/screenshot quando disponível.
-6. Testar navegação e funções principais.
-7. Persistir estado e evidências.
+1. HEAD main.
+2. Actions.
+3. index.html + style-05.css + assets/logo-principado-exact.svg.
+4. Confirmar 4 referências ao asset e 0 referências aos assets antigos no HTML.
+5. Screenshot/live inspection da página publicada.
+6. Testar navegação, CTA, formulário/WhatsApp, links, assets e console/build.
+7. Persistir apenas estado, evidências, blockers e próximo passo.
 
 MONITORING POLICY:
-- Correções automáticas estão autorizadas pelo usuário após análise.
+- Correção automática autorizada pelo usuário após análise.
 - Frequência desejada: 1 hora.
-- A automação desta conta não suporta execução horária; não tratar isso como um agendamento ativo.
-- Em cada ciclo: RECONCILE → CLASSIFY → EXECUTE → VERIFY → HANDOFF.
+- A automação disponível nesta conta não suporta frequência horária; não declarar agendamento horário ativo sem evidência.
+- Fluxo: RECONCILE → CLASSIFY → EXECUTE → VERIFY → HANDOFF.
