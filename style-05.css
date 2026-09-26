@@ -120,3 +120,36 @@
   .hero-logo-image-wrap{width:300px!important;max-width:78%!important}
   .footer .brand-image-wrap{width:122px!important;height:87px!important}
 }
+
+
+/* Canonical logo: exact traced rendering of the user-supplied artwork.
+   White background is part of the supplied logo; no crop, circle, or filter. */
+.brand-exact-wrap{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:150px!important;height:auto!important;background:transparent!important;
+  border-radius:0!important;overflow:visible!important;padding:0!important;
+  box-shadow:none!important;
+}
+.brand-exact-image{
+  display:block!important;width:150px!important;height:auto!important;
+  aspect-ratio:790/568!important;object-fit:contain!important;
+  border-radius:0!important;clip-path:none!important;-webkit-clip-path:none!important;
+  filter:none!important;background:#fff!important;padding:0!important;
+}
+.hero-logo-exact-wrap{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:min(390px,70%)!important;background:transparent!important;
+  border-radius:0!important;overflow:visible!important;box-shadow:none!important;
+}
+.hero-logo-exact{
+  display:block!important;width:100%!important;height:auto!important;
+  aspect-ratio:790/568!important;object-fit:contain!important;
+  border-radius:0!important;clip-path:none!important;-webkit-clip-path:none!important;
+  filter:none!important;background:#fff!important;padding:0!important;box-shadow:none!important;
+}
+.footer .brand-exact-wrap .brand-exact-image{width:140px!important}
+@media(max-width:700px){
+  .brand-exact-image{width:118px!important}
+  .hero-logo-exact-wrap{width:min(300px,78%)!important}
+  .footer .brand-exact-wrap .brand-exact-image{width:120px!important}
+}
