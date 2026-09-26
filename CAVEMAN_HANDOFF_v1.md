@@ -7,16 +7,16 @@ WORKSTREAM:
 Monitoramento contínuo do site + fidelidade visual da marca
 
 STATE:
-Correção da logo aplicada; deploy oficial verde no HEAD atual
+Logo alinhada à referência publicada; correção final deployada com CI verde
 
 MODE:
-WATCH — aguardando apenas a confirmação do próximo ciclo
+WATCH
 
 CANONICAL SOURCE:
 GitHub: principadoproducoes/principadoproducoes
 
 CURRENT VERSION / HEAD:
-a340417663cfd97af213ddc04d9eb78b9deb4946
+bc90ac43987c2f79092aeca73b15fddca01a50e5
 
 BASE:
 main
@@ -28,60 +28,55 @@ PR / MR / TASK:
 Nenhum
 
 SPEC / ADR:
-Handoff operacional fornecido pelo usuário: SIGA / Portable Continuation Protocol v1
+Portable Continuation Protocol / SIGA fornecido pelo usuário
 
 DONE:
-- Reconciliado o estado real do repositório antes da correção.
-- Identificada a causa visual: a logo estava sendo renderizada por assets incorretos e havia regras CSS de recorte circular.
-- A referência oficial fornecida pelo usuário foi vetorizada diretamente a partir da imagem enviada, preservando símbolo, orbital e lettering PRINCIPADO / PRODUÇÕES.
-- Criado assets/logo-principado-oficial.svg.
-- index.html agora usa o asset oficial em favicon, cabeçalho, hero e rodapé (4 referências).
-- CSS final remove qualquer máscara circular e preserva a proporção original da marca.
-- Os workflows de Deploy site to GitHub Pages e pages build and deployment do HEAD a340417663cfd97af213ddc04d9eb78b9deb4946 terminaram com success.
+- VERIFY-FIRST executado antes de qualquer alteração.
+- GitHub main e Actions reconciliados; não havia workstream humano concorrente.
+- A referência pública indicada pelo usuário foi consultada. Ela renderiza a marca no cabeçalho/rodapé como lockup: símbolo P/orbital + PRINCIPADO / PRODUÇÕES; no bloco de experiência aparece o símbolo P.
+- Na implementação atual, o cabeçalho estava usando o lockup vertical completo dentro de uma caixa branca; isso não correspondia à referência.
+- Corrigido index.html para usar logo-mark.svg no cabeçalho, com PRINCIPADO / PRODUÇÕES como wordmark separado.
+- Corrigido o hero para usar logo-mark.svg, sem círculo/crop.
+- Rodapé alinhado ao mesmo lockup.
+- Mantida assets/logo-principado-oficial.svg como asset oficial completo/fonte de referência e favicon.
+- Corrigidas regras CSS finais em style-05.css para impedir máscara circular e respeitar o tratamento da referência.
 
 VERIFY:
-- index.html aponta as quatro ocorrências de marca para assets/logo-principado-oficial.svg.
-- A arte vetorial foi renderizada localmente sobre branco e comparada visualmente com a imagem oficial fornecida pelo usuário; composição e proporções correspondem à referência.
-- HEAD a340417663cfd97af213ddc04d9eb78b9deb4946 está em main.
-- Deploy site to GitHub Pages: success.
-- pages build and deployment: success.
-- A confirmação visual pelo domínio público nesta sessão não pôde ser feita via ferramenta HTTP externa; portanto o deploy verde e a validação local do asset são as evidências canônicas disponíveis.
+- index.html contém o lockup com logo-mark.svg no header e footer.
+- hero usa logo-mark.svg.
+- CSS final de brand-mark não aplica clip-path circular.
+- GitHub Actions no HEAD bc90ac43987c2f79092aeca73b15fddca01a50e5:
+  - Deploy site to GitHub Pages: success
+  - pages build and deployment: success
+- A página de referência pública está acessível ao verificador web e foi usada como referência visual de marca. A página pública deste repositório não pôde ser reaberta pelo verificador web nesta sessão após o deploy; portanto não declarar confirmação visual live desta própria URL.
 
 GATES:
-Nenhum gate humano pendente para a correção da logo.
+Nenhum gate humano pendente.
 
 BLOCKERS:
-Nenhum blocker de GitHub/CI identificado. A ferramenta externa desta sessão não consegue consultar diretamente o domínio do GitHub Pages para screenshot/live DOM.
+Nenhum blocker de GitHub/CI. Limitação atual: o verificador web não abriu a URL pública deste repositório para uma inspeção live pós-deploy.
 
 INVARIANTS:
-- Não declarar sucesso sem evidência.
-- Não duplicar trabalho ativo.
-- Estado real do GitHub vence histórico do chat.
-- Não reintroduzir recorte circular, deformação ou asset alternativo na marca.
-- Preservar a logo fornecida pelo usuário como referência visual canônica.
+- Estado real do GitHub vence chat/memória.
+- Não declarar sucesso visual live sem evidência.
+- Não reintroduzir logo dentro de círculo/crop.
+- Não deformar a marca.
+- Usar a referência fornecida pelo usuário + página de referência publicada para calibrar o tratamento.
 
 NEXT:
-No próximo SIGA, repetir VERIFY-FIRST: HEAD → Actions → arquivos/refs de logo → página pública/screenshot quando disponível → regressões visuais e funcionais → correção autorizada → validação → novo handoff.
+No próximo SIGA: reconciliar HEAD/Actions → abrir página pública e referência → comparar logo e demais regressões visuais/funcionais → corrigir automaticamente conforme autorização existente → validar CI/deploy → persistir handoff.
 
 VERIFY-FIRST:
 1. Ler HEAD da main.
-2. Conferir últimos runs do GitHub Actions e qualquer job em andamento.
-3. Ler index.html, style-05.css e assets/logo-principado-oficial.svg.
-4. Confirmar 4 referências ao asset oficial e ausência de brand-header.webp/brand-full.webp no HTML da marca.
-5. Inspecionar visualmente a publicação quando uma ferramenta de navegador/screenshot estiver disponível.
-6. Testar navegação, CTA, formulário/WhatsApp, assets e console/build quando possível.
-7. Persistir somente estado, evidência, correção e próximo passo.
+2. Conferir Actions e jobs ativos.
+3. Ler index.html, style.css, style-05.css, logo-mark.svg e asset oficial.
+4. Conferir referências de logo e ausência de máscara circular nas regras finais.
+5. Abrir referência pública fornecida pelo usuário e, quando acessível, a publicação própria.
+6. Testar navegação, CTA, formulário/WhatsApp, links, assets e build.
+7. Persistir somente estado, evidências, correções, blockers e próximo passo.
 
 MONITORING POLICY:
-- Frequência pretendida: a cada 1 hora.
-- Escopo: status real do GitHub Pages, CI/CD, página pública, regressões visuais e funcionais.
-- Visual: logo, layout, tipografia, responsividade, navegação e elementos quebrados.
-- Funcional: navegação, links, formulário/CTA, WhatsApp, assets, scripts e console/build quando a ferramenta permitir.
-- Correção: autorização prévia do usuário para corrigir o site sem nova confirmação, exceto ações destrutivas ou gates humanos.
-- Após qualquer correção: implementar → verificar → aguardar/confirmar deploy → persistir estado.
-- Nunca mascarar FAIL nem declarar sucesso sem evidência.
-
-AUTOMATION STATUS:
-- O usuário solicitou análise automática de 1 em 1 hora.
-- O plano atual rejeitou frequência horária; as frequências disponíveis nesta automação não incluem execução a cada hora.
-- Não representar um agendamento horário como existente enquanto o plano não o suportar.
+- O usuário autorizou correção automática do site após análise.
+- Frequência desejada: 1 hora.
+- A automação disponível nesta conta não suporta a frequência horária; não registrar um agendamento horário como ativo sem evidência.
+- Em cada ciclo: RECONCILE → CLASSIFY → EXECUTE → VERIFY → HANDOFF.
