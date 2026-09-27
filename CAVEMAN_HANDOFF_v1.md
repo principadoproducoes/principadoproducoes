@@ -7,7 +7,7 @@ WORKSTREAM:
 Fidelidade visual da logo
 
 STATE:
-Favicon desenho corrigido definitivamente: agora é um PNG transparente de 128x128 derivado diretamente dos pixels do símbolo P/orbital da logo original, recolorido para branco. Query de versão atualizada para romper cache. GitHub Pages deploy verde.
+Favicon corrigido usando exatamente o PNG transparente fornecido pelo usuário como arte-base, embutido em SVG para permitir publicação via GitHub Contents API. Cache bust v=5 aplicado. Deploy e Pages build verdes.
 
 MODE:
 WATCH
@@ -32,14 +32,24 @@ SPEC / ADR:
 SIGA / Portable Continuation Protocol v1
 
 DONE:
-- Usuário reportou que o desenho do favicon ainda estava errado.
-- Reconciliado o estado real e identificado que o favicon SVG anterior era um desenho aproximado, não a arte exata em pixels.
-- Criado um PNG 128x128 transparente a partir do símbolo P/orbital presente na logo original do usuário.
-- Apenas a cor foi invertida para branco; a geometria foi preservada.
-- O arquivo é assets/favicon-principado-p.png.
-- index.html agora referencia o PNG com ?v=3 para evitar cache do favicon antigo.
+- VERIFY-FIRST executado.
+- O screenshot anterior mostrou que o desenho do favicon ainda não correspondia à marca.
+- A causa foi confirmada: os favicons anteriores eram aproximações/arte alternativa.
+- O PNG exato fornecido pelo usuário (128x128, RGBA, somente P/orbital branco em fundo transparente) foi usado como fonte literal.
+- Criado assets/favicon-principado-exact.svg contendo o PNG exato embutido como data:image/png; nenhuma geometria foi redesenhada.
+- index.html agora usa favicon-principado-exact.svg?v=5 e shortcut icon apontando para o mesmo asset.
+- Header/hero/footer permanecem com a logo principal canônica.
 
 VERIFY:
+- HEAD main: c5b18461d634ba63c41b513207a97188e7b3308c.
+- index.html tem 2 tags de favicon, ambas apontando para favicon-principado-exact.svg?v=5.
+- SVG do favicon contém data:image/png;base64 e não contém rect/circle de fundo.
+- GitHub Actions no HEAD:
+  - Deploy site to GitHub Pages: success.
+  - pages build and deployment: success.
+- A inspeção visual da aba após esta troca ainda depende da captura do navegador do usuário; o verificador web não consegue confirmar a aba real desta publicação.
+
+GATES:
 - HEAD main: aa291fb33b76bcbc2e8aa3d74ec02e3e382a4a82.
 - index.html contém favicon-principado-p.png?v=3.
 - GitHub Actions no HEAD:
@@ -62,7 +72,7 @@ INVARIANTS:
 - Não declarar confirmação visual live da aba sem screenshot.
 
 NEXT:
-No próximo SIGA: reconciliar HEAD/Actions → revisar nova captura do navegador → verificar favicon e demais regressões visuais/funcionais → corrigir automaticamente.
+No próximo SIGA: reconciliar HEAD/Actions → revisar captura da aba e site → verificar novos erros visuais/funcionais → corrigir automaticamente conforme autorização → validar deploy → handoff.
 
 VERIFY-FIRST:
 1. HEAD main.
