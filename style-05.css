@@ -303,3 +303,11 @@
 /* Final home-header P scale: slightly smaller for precise visual symmetry. */
 .brand-header-circle svg{width:64%!important;height:64%!important;display:block!important;flex:0 0 auto!important}
 @media(max-width:700px){.brand-header-circle svg{width:64%!important;height:64%!important}}
+
+
+/* Footer: match the approved home header logo — P only, centered and proportionate. */
+.footer .brand-header-exact{gap:0!important}
+.footer .brand-header-circle{width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#fff!important;border-radius:50%!important;overflow:hidden!important}
+.footer .brand-header-circle img{width:64%!important;height:64%!important;display:block!important;object-fit:contain!important;object-position:center!important;filter:none!important;background:transparent!important}
+.footer .brand-header-name{display:none!important}
+@media(max-width:700px){.footer .brand-header-circle{width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important}.footer .brand-header-circle img{width:64%!important;height:64%!important}}
