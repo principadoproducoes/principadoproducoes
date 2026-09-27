@@ -15,8 +15,19 @@ cinematicSections.forEach(section=>sectionObserver.observe(section));
 document.getElementById("year").textContent=new Date().getFullYear();
 
 const form=document.getElementById("budgetForm");
+const formStatus=document.getElementById("formStatus");
+const phoneInput=form?.querySelector('input[name="phone"]');
+phoneInput?.addEventListener("input",e=>{
+  let v=e.target.value.replace(/\\D/g,"").slice(0,11);
+  if(v.length>10)e.target.value=v.replace(/(\\\\d{2})(\\\\d{5})(\\\\d{4})/,"($1) $2-$3");
+  else if(v.length>6)e.target.value=v.replace(/(\\\\d{2})(\\\\d{4,5})(\\\\d{0,4})/,"($1) $2-$3");
+  else if(v.length>2)e.target.value=v.replace(/(\\\\d{2})(\\\\d{0,5})/,"($1) $2");
+  else e.target.value=v;
+});
 form?.addEventListener("submit",e=>{
   e.preventDefault();
+  if(!form.reportValidity()) return;
+  if(form.querySelector('[name="website"]')?.value) return;
   const d=new FormData(form);
   const text=`Olá, Principado Produções! 👋
 
@@ -32,7 +43,12 @@ Sobre o evento:
 ${d.get("message")||"Gostaria de conversar sobre o projeto."}
 
 Quero saber como a Principado pode produzir essa experiência.`;
-  window.open(`https://wa.me/5521975542783?text=${encodeURIComponent(text)}`,"_blank","noopener");
+  window.open(`https://wa.me/5521975542783?text=function%20()%20%7B%20%5Bnative%20code%5D%20%7D`,"_blank","noopener");
+  if(formStatus){
+    formStatus.textContent="Briefing preparado. O WhatsApp foi aberto para você concluir o envio.";
+    formStatus.classList.add("success");
+  }
+  form.reset();
 });
 
 document.addEventListener("mousemove",e=>{
@@ -123,3 +139,7 @@ if(processTimeline&&processSteps.length){
   const processObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){processSteps.forEach(step=>step.classList.remove("is-active"));entry.target.classList.add("is-active");processTimeline.classList.add("is-progress")}}),{threshold:.55,rootMargin:"-8% 0px -35% 0px"});
   processSteps.forEach(step=>processObserver.observe(step));
 }
+
+document.querySelectorAll('a[href^="https://wa.me/"], a[href*="instagram.com/"], .direct-contact a').forEach(link=>{
+  link.addEventListener("click",()=>{ if(window.va) window.va("contact_click",{url:link.href}); });
+});
