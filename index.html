@@ -4,15 +4,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Principado Produções — produção 360º de eventos musicais, casamentos, 15 anos e eventos corporativos no Rio de Janeiro.">
+  <meta name="keywords" content="produção de eventos, eventos Rio de Janeiro, produção 360, shows, casamentos, 15 anos, eventos corporativos">
+  <meta name="author" content="Principado Produções">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://principadoproducoes.vercel.app/">
   <meta name="theme-color" content="#050505">
   <meta property="og:title" content="Principado Produções | Grandes experiências são produzidas">
   <meta property="og:description" content="Produção 360º para eventos musicais, sociais e corporativos.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://principadoproducoes.vercel.app/">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Principado Produções | Grandes experiências são produzidas">
+  <meta name="twitter:description" content="Produção 360º para eventos musicais, sociais e corporativos.">
   <title>Principado Produções | Grandes experiências são produzidas</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon-principado-exact.svg?v=5"><link rel="shortcut icon" href="assets/favicon-principado-exact.svg?v=5">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
   <div class="cursor-glow"></div>
@@ -28,6 +44,7 @@
         <a href="#eventos">Eventos</a>
         <a href="#360">Principado 360º</a>
         <a href="#processo">Processo</a>
+        <a href="#diferenciais">Diferenciais</a>
         <a class="nav-button" href="#orcamento">Solicitar orçamento</a>
       </nav>
     </div>
@@ -106,12 +123,28 @@
 
     <section class="no-portfolio"><div class="container"><div class="future-card reveal"><p class="kicker">O PRÓXIMO EVENTO</p><h2>O nosso próximo grande projeto pode ser <em>o seu.</em></h2><p>Estamos construindo uma produtora para grandes experiências. O portfólio começa com cada projeto que colocamos de pé.</p><a class="button primary" href="#orcamento">Começar uma conversa <b>↗</b></a></div></div></section>
 
+    <section class="why-principado" id="diferenciais">
+      <div class="container">
+        <div class="why-head reveal">
+          <div><p class="kicker">POR QUE A PRINCIPADO?</p><h2>Menos ruído.<br><em>Mais produção.</em></h2></div>
+          <p>Uma operação pensada para transformar complexidade em uma experiência clara, organizada e memorável.</p>
+        </div>
+        <div class="why-grid">
+          <article class="why-card reveal"><span>01</span><h3>VISÃO</h3><p>Estratégia antes da execução. Cada decisão parte do objetivo do evento.</p></article>
+          <article class="why-card reveal"><span>02</span><h3>CONTROLE</h3><p>Uma gestão integrada para reduzir ruído, retrabalho e desencontro entre fornecedores.</p></article>
+          <article class="why-card reveal"><span>03</span><h3>EXPERIÊNCIA</h3><p>O público percebe o resultado — não a complexidade por trás dele.</p></article>
+          <article class="why-card reveal"><span>04</span><h3>ENTREGA</h3><p>Do briefing ao último detalhe, a produção acompanha o projeto de ponta a ponta.</p></article>
+        </div>
+      </div>
+    </section>
+
     <section class="budget" id="orcamento"><div class="container budget-grid"><div class="budget-copy reveal"><p class="kicker">VAMOS PRODUZIR?</p><h2>Conte sua ideia.<br><em>A Principado coloca de pé.</em></h2><p>Preencha o briefing inicial. Ele será enviado para o WhatsApp da Principado com as informações do seu projeto.</p><div class="direct-contact"><a href="https://wa.me/5521975542783" target="_blank" rel="noopener">WhatsApp <span>↗</span></a><a href="https://instagram.com/principadoproducoes" target="_blank" rel="noopener">Instagram <span>↗</span></a><a href="mailto:principadoproducoes@gmail.com">E-mail <span>↗</span></a></div></div>
-      <form class="budget-form reveal" id="budgetForm"><div class="form-row"><label>Seu nome<input name="name" required placeholder="Nome completo"></label><label>WhatsApp<input name="phone" required placeholder="(21) 99999-9999"></label></div><label>Tipo de evento<select name="event" required><option value="" disabled selected>Selecione</option><option>Evento musical / show</option><option>Festa / evento particular</option><option>Casamento</option><option>15 anos</option><option>Evento corporativo</option><option>Outro</option></select></label><div class="form-row"><label>Data prevista<input type="date" name="date"></label><label>Cidade / local<input name="location" placeholder="Ex.: Rio de Janeiro"></label></div><label>Faixa de investimento<select name="budget"><option value="" selected>Prefiro conversar sobre o projeto</option><option>Até R$ 30 mil</option><option>R$ 30 mil a R$ 60 mil</option><option>R$ 60 mil a R$ 100 mil</option><option>Acima de R$ 100 mil</option></select></label><label>Conte sobre o evento<textarea name="message" rows="5" placeholder="Número estimado de convidados, artistas, estrutura desejada, referências..."></textarea></label><button class="button primary" type="submit">Enviar briefing pelo WhatsApp <b>↗</b></button><small>Sem compromisso. As informações serão usadas para entender o projeto e iniciar a conversa.</small></form>
+      <form class="budget-form reveal" id="budgetForm" novalidate>
+        <div class="form-honeypot" aria-hidden="true"><label>Não preencher<input name="website" tabindex="-1" autocomplete="off"></label></div><div class="form-row"><label>Seu nome<input name="name" required placeholder="Nome completo"></label><label>WhatsApp<input name="phone" required placeholder="(21) 99999-9999"></label></div><label>Tipo de evento<select name="event" required><option value="" disabled selected>Selecione</option><option>Evento musical / show</option><option>Festa / evento particular</option><option>Casamento</option><option>15 anos</option><option>Evento corporativo</option><option>Outro</option></select></label><div class="form-row"><label>Data prevista<input type="date" name="date"></label><label>Cidade / local<input name="location" placeholder="Ex.: Rio de Janeiro"></label></div><label>Faixa de investimento<select name="budget"><option value="" selected>Prefiro conversar sobre o projeto</option><option>Até R$ 30 mil</option><option>R$ 30 mil a R$ 60 mil</option><option>R$ 60 mil a R$ 100 mil</option><option>Acima de R$ 100 mil</option></select></label><label>Conte sobre o evento<textarea name="message" rows="5" placeholder="Número estimado de convidados, artistas, estrutura desejada, referências..."></textarea></label><div class="form-status" id="formStatus" role="status" aria-live="polite"></div><button class="button primary" type="submit">Enviar briefing pelo WhatsApp <b>↗</b></button><small>Sem compromisso. As informações serão usadas para entender o projeto e iniciar a conversa.</small></form>
     </div></section>
   </main>
 
   <footer class="footer"><div class="container footer-grid"><a class="brand brand-header-exact" href="#inicio" aria-label="Principado Produções"><span class="brand-header-circle"><img src="assets/logo-principado-exact.svg" alt=""></span><span class="brand-header-name">PRINCIPADO<small>PRODUÇÕES</small></span></a><div><p>Rio de Janeiro — RJ</p><p>(21) 97554-2783</p></div><div><p>@principadoproducoes</p><p>principadoproducoes@gmail.com</p></div><a href="#inicio">Voltar ao topo ↑</a></div><div class="container copyright">© <span id="year"></span> Principado Produções. Todos os direitos reservados.</div></footer>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
