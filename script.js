@@ -32,7 +32,7 @@ form?.addEventListener("submit",e=>{
   const text=`Olá, Principado Produções! 👋
 
 Meu nome é ${d.get("name")}.
-WhatsApp: ${d.get("phone")}
+Empresa: ${d.get("company")||"Não informada"}\nWhatsApp: ${d.get("phone")}\nConvidados: ${d.get("guests")||"A definir"}
 
 Tipo de evento: ${d.get("event")}
 Data prevista: ${d.get("date")||"A definir"}
