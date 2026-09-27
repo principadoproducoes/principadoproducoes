@@ -45,3 +45,29 @@ body{overflow-x:hidden}
 
 /* Contrast pass: ensure text remains readable on dark backgrounds */
 body{color:#f5f5f5}.service-page,.portfolio-section,.instagram-section{color:#f5f5f5}.service-page p,.portfolio-section p,.instagram-section p{color:rgba(255,255,255,.72)}.portfolio-card p,.service-content p{color:rgba(255,255,255,.72)}.portfolio-card h3,.service-body h2,.instagram-copy h2{color:#fff}.service-point{color:rgba(255,255,255,.9)}.service-point span,.portfolio-placeholder small,.instagram-wall small{color:rgba(255,255,255,.62)}.instagram-wall strong{color:#fff}.section-head>p{color:rgba(255,255,255,.72)}
+
+
+/* Light surfaces: use dark text for clear contrast */
+body{color:#101010}
+.statement,.event-section,.experience,.process-section,.budget{color:#101010}
+.statement h2,.statement-highlight,.event-content h3,.experience h2,.experience-points span,.center-head h2,.process-step h3,.budget h2{color:#101010}
+.statement-copy,.event-content p,.section-head>p,.services-head>p,.experience-points b,.process-step p,.budget-copy>p:not(.kicker){color:#666}
+.event-content small{color:#777}
+.event-number{color:#888}
+.process-step span{color:#777}
+.experience-points div{color:#101010}
+.budget-form{color:#101010}
+.budget-form label{color:#101010}
+.budget-form input,.budget-form select,.budget-form textarea{color:#111}
+.budget-form input::placeholder,.budget-form textarea::placeholder{color:#777;opacity:1}
+.statement h2 em,.hero h1 em,.statement h2 em{color:#555}
+.statement-highlight em{color:#777}
+
+/* Header adapts to light sections while keeping white text over dark hero */
+.header:not(.on-dark) .brand-text{color:#050505!important}
+.header:not(.on-dark) .brand-text small{color:#050505!important}
+.header:not(.on-dark) .menu-toggle span{background:#000!important}
+
+/* Dark sections keep their intended light typography */
+.hero,.services,.why-principado,.portfolio-section,.instagram-section,.footer{color:#fff}
+.hero h1,.services-head h2,.why-head h2,.portfolio-card h3,.instagram-copy h2,.footer{color:#fff}
