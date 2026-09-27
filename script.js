@@ -18,10 +18,10 @@ const form=document.getElementById("budgetForm");
 const formStatus=document.getElementById("formStatus");
 const phoneInput=form?.querySelector('input[name="phone"]');
 phoneInput?.addEventListener("input",e=>{
-  let v=e.target.value.replace(/\\D/g,"").slice(0,11);
-  if(v.length>10)e.target.value=v.replace(/(\\\\d{2})(\\\\d{5})(\\\\d{4})/,"($1) $2-$3");
-  else if(v.length>6)e.target.value=v.replace(/(\\\\d{2})(\\\\d{4,5})(\\\\d{0,4})/,"($1) $2-$3");
-  else if(v.length>2)e.target.value=v.replace(/(\\\\d{2})(\\\\d{0,5})/,"($1) $2");
+  let v=e.target.value.replace(/\D/g,"").slice(0,11);
+  if(v.length>10)e.target.value=v.replace(/(\d{2})(\d{5})(\d{4})/,"($1) $2-$3");
+  else if(v.length>6)e.target.value=v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,"($1) $2-$3");
+  else if(v.length>2)e.target.value=v.replace(/(\d{2})(\d{0,5})/,"($1) $2");
   else e.target.value=v;
 });
 form?.addEventListener("submit",e=>{
@@ -43,14 +43,13 @@ Sobre o evento:
 ${d.get("message")||"Gostaria de conversar sobre o projeto."}
 
 Quero saber como a Principado pode produzir essa experiência.`;
-  window.open(`https://wa.me/5521975542783?text=function%20()%20%7B%20%5Bnative%20code%5D%20%7D`,"_blank","noopener");
+  window.open(`https://wa.me/5521975542783?text=${encodeURIComponent(text)}`,"_blank","noopener");
   if(formStatus){
     formStatus.textContent="Briefing preparado. O WhatsApp foi aberto para você concluir o envio.";
     formStatus.classList.add("success");
   }
   form.reset();
 });
-
 document.addEventListener("mousemove",e=>{
   const glow=document.querySelector(".cursor-glow");
   if(window.innerWidth>900){glow.style.opacity=".025";glow.style.left=e.clientX+"px";glow.style.top=e.clientY+"px"}
