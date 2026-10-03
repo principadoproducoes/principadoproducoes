@@ -152,7 +152,8 @@ form?.addEventListener("submit",e=>{
 Meu nome é ${d.get("name")}.
 Empresa: ${d.get("company")||"Não informada"}\nWhatsApp: ${d.get("phone")}\nConvidados: ${d.get("guests")||"A definir"}
 
-Tipo de evento: ${d.get("event")}
+Categoria / tipo de evento: ${d.get("event")}
+Itens e serviços desejados: ${d.get("eventItems")||"A definir"}
 Data prevista: ${d.get("date")||"A definir"}
 Cidade/local: ${d.get("location")||"A definir"}
 Faixa de investimento: ${d.get("budget")||"A conversar"}
