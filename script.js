@@ -16,6 +16,123 @@ document.getElementById("year").textContent=new Date().getFullYear();
 
 const form=document.getElementById("budgetForm");
 const formStatus=document.getElementById("formStatus");
+const selectedEventInput=document.getElementById("selectedEvent");
+const eventBuilder=document.getElementById("eventBuilder");
+const builderCategories=document.getElementById("builderCategories");
+const builderSubtypesWrap=document.getElementById("builderSubtypesWrap");
+const builderSubtypes=document.getElementById("builderSubtypes");
+const builderCatalogWrap=document.getElementById("builderCatalogWrap");
+const builderTabs=document.getElementById("builderTabs");
+const builderProducts=document.getElementById("builderProducts");
+const builderStep=document.getElementById("builderStep");
+const builderCount=document.getElementById("builderCount");
+const builderSummary=document.getElementById("builderSummary");
+const builderSummaryText=document.getElementById("builderSummaryText");
+const builderSummaryCount=document.getElementById("builderSummaryCount");
+const eventItemsInput=document.createElement("input");
+eventItemsInput.type="hidden";eventItemsInput.name="eventItems";form?.appendChild(eventItemsInput);
+
+const eventCatalog={
+ social:{label:"Eventos sociais",subtypes:{
+  "Festa infantil — Picnic":{defaults:["Toalhas de picnic","Bolo","Mesa de apoio"]},
+  "Festa infantil — Salão / aniversário":{defaults:["Bolo principal","Mesa do bolo","Mesa de doces"]},
+  "Batizado":{defaults:["Mesa de doces","Bolo","Arranjos florais"]},
+  "Crisma":{defaults:["Mesa de doces","Bolo","Arranjos"]},
+  "XV anos":{defaults:["Mesa do bolo","Bolo principal","DJ / música"]},
+  "Casamento":{defaults:["Mesa do bolo","Bolo","Flores / decoração","Cerimonial"]},
+  "Bar Mitzvah":{defaults:["Mesa do bolo","Decoração temática","DJ / música"]}
+ }},
+ corporate:{label:"Eventos corporativos",subtypes:{
+  "Feira":{defaults:["Estande / estrutura","Identidade visual","Iluminação"]},
+  "Exposição":{defaults:["Montagem expositiva","Iluminação","Comunicação visual"]},
+  "Simpósio":{defaults:["Palco","Som","Projeção / LED","Coffee break"]},
+  "Workshop":{defaults:["Sala / estrutura","Coffee break","Projetor / tela"]},
+  "Aula":{defaults:["Sala / estrutura","Projetor / tela","Som"]},
+  "Reunião":{defaults:["Sala de reunião","Água","Café"]},
+  "Treinamento":{defaults:["Sala / estrutura","Projetor / tela","Coffee break"]},
+  "Demais eventos corporativos":{defaults:[]}
+ }}
+};
+
+const catalogTabs={
+ "Decoração":["Conceito visual","Painel / backdrop","Balões","Flores / arranjos","Mesa do bolo","Mesa de doces","Iluminação decorativa","Pista de dança","Identidade visual","Sinalização","Mobiliário / lounge"],
+ "Alimentação & bebidas":["Coffee break","Coquetel","Salgados","Mini lanches","Jantar","Mesa de frutas","Água","Sucos","Refrigerantes","Café","Bar / drinks"],
+ "Bolo & doces":["Bolo principal","Brigadeiros","Beijinhos","Docinhos finos","Docinhos personalizados","Cupcakes","Cookies","Bem-casados","Suportes para doces","Topo de bolo"],
+ "Estrutura & tecnologia":["Mesas","Cadeiras","Tendas / cobertura","Palco","Som","Microfones","Iluminação","Projetor / tela","Painel LED","TV / monitor","Internet","Gerador","Transmissão"],
+ "Descartáveis & apoio":["Copos","Pratos","Talheres","Louças","Guardanapos","Canudos","Embalagens","Lembrancinhas","Crachás","Blocos","Canetas","Kits"],
+ "Entretenimento & produção":["DJ","Banda","Recreação","Brinquedos","Personagem","Atração especial","Fotografia","Filmagem","Cabine de fotos","Recepção","Cerimonial","Coordenação","Segurança","Equipe de produção"]
+};
+
+const subtypeExtras={
+ "Festa infantil — Picnic":["Almofadas e pufes","Mesas baixas","Oficina infantil","Pintura facial"],
+ "Festa infantil — Salão / aniversário":["Tema completo","Personagem","Recreação","Brinquedos"],
+ "Batizado":["Velas / elementos simbólicos","Fotografia","Filmagem"],
+ "Crisma":["Elementos simbólicos","Fotografia","Filmagem"],
+ "XV anos":["Coreografia","Atração especial","Pista de dança"],
+ "Casamento":["Cerimonial","Assessoria de fornecedores","Banda","DJ","Espumante"],
+ "Bar Mitzvah":["Conceito temático","Atração especial","Cabine de fotos"],
+ "Feira":["Estande / estrutura","Promotores","Brindes","Ativação de marca"],
+ "Exposição":["Vitrines","Montagem expositiva","Equipe de montagem"],
+ "Simpósio":["Púlpito","Gravação","Transmissão","Credenciamento"],
+ "Workshop":["Apostilas","Certificados","Credenciamento"],
+ "Aula":["Apostilas","Certificados","Gravação"],
+ "Reunião":["Videoconferência","Materiais impressos"],
+ "Treinamento":["Apostilas","Certificados","Kits"],
+ "Demais eventos corporativos":["Palco","Painel LED","Ativação de marca","Recepção"]
+};
+
+let builderCategory="",builderSubtype="",builderTab="",selectedCatalogItems=new Set();
+const getTabs=function(){
+ const base=Object.keys(catalogTabs);
+ const corporate=builderCategory==="corporate";
+ if(corporate) return ["Decoração","Alimentação & bebidas","Bolo & doces","Estrutura & tecnologia","Descartáveis & apoio","Entretenimento & produção"];
+ return base;
+};
+const getItems=function(tab){
+ const items=(catalogTabs[tab]||[]).slice();
+ const extras=subtypeExtras[builderSubtype]||[];
+ extras.forEach(function(item){if(!items.includes(item))items.push(item);});
+ return items;
+};
+const updateSummary=function(){
+ const items=Array.from(selectedCatalogItems);
+ builderCount.textContent=items.length+" "+(items.length===1?"item":"itens")+" selecionados";
+ builderSummaryCount.textContent=items.length+" itens";
+ builderSummaryText.textContent=(builderCategory==="social"?"Social":"Corporativo")+" · "+builderSubtype;
+ eventItemsInput.value=items.join(" | ");
+};
+const renderProducts=function(){
+ const items=getItems(builderTab);
+ builderProducts.innerHTML=items.map(function(item){
+  const checked=selectedCatalogItems.has(item);
+  return "<label class=\"builder-product"+(checked?" is-default":"")+"\"><input type=\"checkbox\" value=\""+item.replace(/"/g,"&quot;")+"\" "+(checked?"checked":"")+" /><span class=\"builder-product-check\">"+(checked?"✓":"")+"</span><span><strong>"+item+"</strong><small>"+(checked?"Sugestão inicial — você pode retirar":"Adicionar ao briefing")+"</small></span></label>";
+ }).join("");
+ builderProducts.querySelectorAll("input").forEach(function(input){input.addEventListener("change",function(){
+  if(input.checked)selectedCatalogItems.add(input.value);else selectedCatalogItems.delete(input.value);
+  input.closest(".builder-product")?.classList.toggle("is-default",input.checked);
+  const check=input.parentElement.querySelector(".builder-product-check");if(check)check.textContent=input.checked?"✓":"";
+  updateSummary();
+ });});
+};
+const renderTabs=function(){
+ builderTabs.innerHTML=getTabs().map(function(tab,i){return "<button type=\"button\" class=\"builder-tab"+(i===0?" is-active":"")+"\" data-tab=\""+tab+"\">"+tab+"</button>";}).join("");
+ builderTab=getTabs()[0];
+ builderTabs.querySelectorAll(".builder-tab").forEach(function(tab){tab.addEventListener("click",function(){builderTab=tab.dataset.tab;builderTabs.querySelectorAll(".builder-tab").forEach(function(t){t.classList.remove("is-active")});tab.classList.add("is-active");renderProducts();});});
+};
+const openBuilder=function(){
+ const type=eventCatalog[builderCategory].subtypes[builderSubtype];
+ selectedCatalogItems=new Set(type.defaults||[]);
+ selectedCatalogItems.forEach(function(item){if(!getTabs().some(function(tab){return getItems(tab).includes(item)}))selectedCatalogItems.delete(item);});
+ renderTabs();renderProducts();builderCatalogWrap.hidden=false;builderSummary.hidden=false;builderStep.textContent="03 / 03";selectedEventInput.value=builderSubtype;updateSummary();
+};
+builderCategories?.querySelectorAll(".builder-category").forEach(function(button){button.addEventListener("click",function(){
+ builderCategory=button.dataset.category;builderSubtype="";selectedCatalogItems=new Set();
+ builderCategories.querySelectorAll(".builder-category").forEach(function(b){b.classList.remove("is-selected")});button.classList.add("is-selected");
+ builderSubtypes.innerHTML=Object.keys(eventCatalog[builderCategory].subtypes).map(function(name){return "<button type=\"button\" class=\"builder-subtype\" data-subtype=\""+name+"\">"+name+"</button>";}).join("");
+ builderSubtypesWrap.hidden=false;builderCatalogWrap.hidden=true;builderSummary.hidden=true;builderStep.textContent="02 / 03";
+ builderSubtypes.querySelectorAll(".builder-subtype").forEach(function(sub){sub.addEventListener("click",function(){builderSubtype=sub.dataset.subtype;builderSubtypes.querySelectorAll(".builder-subtype").forEach(function(s){s.classList.remove("is-selected")});sub.classList.add("is-selected");openBuilder();});});
+});});
+
 const phoneInput=form?.querySelector('input[name="phone"]');
 phoneInput?.addEventListener("input",e=>{
   let v=e.target.value.replace(/\D/g,"").slice(0,11);
@@ -28,6 +145,7 @@ form?.addEventListener("submit",e=>{
   e.preventDefault();
   if(!form.reportValidity()) return;
   if(form.querySelector('[name="website"]')?.value) return;
+  if(!selectedEventInput?.value){ if(formStatus){formStatus.textContent="Escolha a categoria e o tipo de evento antes de enviar o briefing.";formStatus.classList.add("success");} eventBuilder?.scrollIntoView({behavior:"smooth",block:"center"}); return; }
   const d=new FormData(form);
   const text=`Olá, Principado Produções! 👋
 
