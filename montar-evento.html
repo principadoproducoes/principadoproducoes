@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Monte seu evento com a Principado Produções. Escolha o tipo, personalize os detalhes e envie seu briefing pelo WhatsApp.">
+  <title>Monte seu evento | Principado Produções</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon-principado-exact.svg?v=5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="montar-evento.css">
+</head>
+<body>
+  <header class="builder-top">
+    <a class="builder-brand" href="index.html" aria-label="Voltar para Principado Produções">
+      <span><img src="assets/logo-p-only.svg" alt=""></span>
+      <b>PRINCIPADO <small>PRODUÇÕES</small></b>
+    </a>
+    <a class="back-link" href="index.html#orcamento">← Voltar ao site</a>
+  </header>
+
+  <main class="builder-page">
+    <div class="builder-intro">
+      <p class="eyebrow">PRINCIPADO / EVENT BUILDER</p>
+      <h1>Monte seu evento<br><em>do seu jeito.</em></h1>
+      <p>Escolha o formato, explore as possibilidades e monte um briefing visual. Você decide o que imagina; a Principado transforma em produção.</p>
+    </div>
+
+    <div class="progress">
+      <div class="progress-item is-active" data-progress="1"><span>01</span> Formato</div>
+      <i></i><div class="progress-item" data-progress="2"><span>02</span> Experiência</div>
+      <i></i><div class="progress-item" data-progress="3"><span>03</span> Briefing</div>
+    </div>
+
+    <section class="builder-shell">
+      <div class="builder-main">
+        <section class="builder-step-section is-visible" id="step1">
+          <div class="step-heading"><span>01</span><div><p class="eyebrow">COMECE AQUI</p><h2>Que tipo de evento você está imaginando?</h2><p>Escolha uma categoria para revelar os formatos.</p></div></div>
+          <div class="category-grid">
+            <button class="choice-card" data-category="social"><span class="choice-icon">✦</span><strong>Eventos sociais</strong><small>Festas, celebrações e momentos especiais</small><b>→</b></button>
+            <button class="choice-card" data-category="corporate"><span class="choice-icon">▦</span><strong>Eventos corporativos</strong><small>Marcas, empresas e experiências profissionais</small><b>→</b></button>
+          </div>
+        </section>
+
+        <section class="builder-step-section" id="step2">
+          <div class="step-heading"><span>02</span><div><p class="eyebrow">FORMATO</p><h2>Agora escolha o tipo de evento.</h2><p>Isso ajuda a Principado a sugerir uma base de produção mais inteligente.</p></div></div>
+          <div class="subtype-grid" id="subtypes"></div>
+          <button class="text-button" id="backToCategory">← Trocar categoria</button>
+        </section>
+
+        <section class="builder-step-section" id="step3">
+          <div class="step-heading"><span>03</span><div><p class="eyebrow">PERSONALIZE</p><h2>Construa a experiência.</h2><p>Os itens marcados como recomendados já vêm sugeridos. Você pode adicionar ou retirar qualquer coisa.</p></div></div>
+          <div class="catalog-tabs" id="tabs"></div>
+          <div class="catalog-grid" id="products"></div>
+          <button class="text-button" id="backToSubtype">← Trocar tipo de evento</button>
+        </section>
+      </div>
+
+      <aside class="briefing-card">
+        <div class="briefing-top"><span>SEU BRIEFING</span><strong id="count">0 itens</strong></div>
+        <div class="briefing-event" id="eventPreview">
+          <span class="preview-mark">P</span>
+          <div><small>EVENTO</small><strong id="eventName">Escolha o formato</strong><span id="eventCategory">Ainda não definido</span></div>
+        </div>
+        <div class="selected-list" id="selectedList"><p>Suas escolhas aparecerão aqui.</p></div>
+        <div class="briefing-footer">
+          <div><small>PRÓXIMO PASSO</small><strong>Receba uma conversa personalizada no WhatsApp.</strong></div>
+          <button id="sendBriefing" disabled>Enviar briefing <span>↗</span></button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="montar-evento.js" defer></script>
+</body>
+</html>
