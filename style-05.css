@@ -311,3 +311,41 @@
 .footer .brand-header-circle img{width:64%!important;height:64%!important;display:block!important;object-fit:contain!important;object-position:center!important;filter:none!important;background:transparent!important}
 .footer .brand-header-name{display:none!important}
 @media(max-width:700px){.footer .brand-header-circle{width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important}.footer .brand-header-circle img{width:64%!important;height:64%!important}}
+
+
+/* Home header LOGIN — discreet access point in the upper-right corner. */
+.login-link{
+  position:absolute!important;
+  right:0!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  z-index:5!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:36px!important;
+  padding:9px 15px!important;
+  border:1px solid rgba(255,255,255,.32)!important;
+  border-radius:999px!important;
+  color:#fff!important;
+  background:rgba(0,0,0,.18)!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  letter-spacing:.12em!important;
+  text-decoration:none!important;
+  pointer-events:auto!important;
+  transition:background .2s ease,border-color .2s ease,transform .2s ease!important;
+}
+.login-link:hover{
+  background:#fff!important;
+  color:#050505!important;
+  border-color:#fff!important;
+  transform:translateY(-50%) translateY(-2px)!important;
+}
+@media(max-width:1100px){
+  .login-link{right:0!important;padding:8px 12px!important;font-size:10px!important}
+}
+@media(max-width:700px){
+  .login-link{right:58px!important;top:36px!important;transform:translateY(-50%)!important;min-height:32px!important;padding:7px 11px!important;font-size:9px!important}
+  .login-link:hover{transform:translateY(-50%)!important}
+}
