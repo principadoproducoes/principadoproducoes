@@ -109,3 +109,6 @@ body{color:#101010}
 .builder-summary strong{color:#111}.builder-summary-count{float:right;font-weight:800;color:#111}
 @media(max-width:800px){.builder-subtypes{grid-template-columns:repeat(2,1fr)}.builder-products{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.event-builder{padding:18px;border-radius:18px}.builder-categories,.builder-subtypes,.builder-products{grid-template-columns:1fr}.builder-head{margin-bottom:18px}.builder-catalog-head{align-items:flex-start;flex-direction:column;gap:5px}}
+
+/* Visual Event Builder entry point */
+.visual-builder-link{display:inline-flex;align-items:center;gap:8px;margin-top:12px;color:#111;text-decoration:none;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid #bbb;padding-bottom:4px;transition:.2s}.visual-builder-link:hover{border-color:#111;transform:translateX(3px)}.visual-builder-link b{font-size:14px}
