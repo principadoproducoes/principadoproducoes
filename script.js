@@ -145,7 +145,7 @@ form?.addEventListener("submit",e=>{
   e.preventDefault();
   if(!form.reportValidity()) return;
   if(form.querySelector('[name="website"]')?.value) return;
-  if(!selectedEventInput?.value){ if(formStatus){formStatus.textContent="Escolha a categoria e o tipo de evento antes de enviar o briefing.";formStatus.classList.add("success");} eventBuilder?.scrollIntoView({behavior:"smooth",block:"center"}); return; }
+  if(selectedEventInput && !selectedEventInput.value) selectedEventInput.value="A definir — montar pelo configurador visual";
   const d=new FormData(form);
   const text=`Olá, Principado Produções! 👋
 
